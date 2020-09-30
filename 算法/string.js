@@ -5,7 +5,6 @@
  * @returns {string}
  */
 function replaceSpace(str) {
-    console.log(str.replace(/\s/g, '%20'));
     return str.replace(/\s/g, '%20');
 }
 
@@ -91,17 +90,37 @@ var strToInt = function(str) {
  * @param {number} n
  * @return {string}
  */
-var reverseLeftWords = function(s, n) {
-    if(n < s.length <= 1000 && n >= 1) {
-      var arr = s.split('');
-      var start = s.slice(0, n);
-      var end = s.slice(n, arr.length);
-      console.log(start)
-      console.log(end)
-      console.log(start + end)
-      return end + start
-    } else {
-      return 0
-    }
+// var reverseLeftWords = function(s, n) {
+//     if(n < s.length <= 1000 && n >= 1) {
+//       var arr = s.split('');
+//       var start = s.slice(0, n);
+//       var end = s.slice(n, arr.length);
+//       return end + start
+//     } else {
+//       return 0
+//     }
+// };
+// reverseLeftWords('abedefg', 2)
+
+/**
+ * 题目：给定一个非空字符串 s，最多删除一个字符。判断是否能成为回文字符串。
+ * @param {string} s
+ * @return {boolean}
+ */
+var validPalindrome = function(s) {
+  let res = false, left = -1, right = s.length
+  while (left < right) {
+      if (s[++left] !== s[--right]) {
+          res = true
+          break
+      }
+  }
+  return res ? isPalindrome(s, left + 1, right) || isPalindrome(s, left, right - 1) : true
 };
-reverseLeftWords('abedefg', 2)
+function isPalindrome(s, left, right) {
+  while (left < right) {
+      if (s[left++] !== s[right--]) return false
+  }
+  return true
+}
+validPalindrome('abc');
