@@ -84,25 +84,6 @@ var strToInt = function(str) {
 };
 
 /**
- * 题目：字符串的左旋转操作是把字符串前面的若干个字符转移到字符串的尾部。请定义一个函数实现字符串左旋转操作的功能。
- * 比如，输入字符串"abcdefg"和数字2，该函数将返回左旋转两位得到的结果"cdefgab"。
- * @param {string} s
- * @param {number} n
- * @return {string}
- */
-// var reverseLeftWords = function(s, n) {
-//     if(n < s.length <= 1000 && n >= 1) {
-//       var arr = s.split('');
-//       var start = s.slice(0, n);
-//       var end = s.slice(n, arr.length);
-//       return end + start
-//     } else {
-//       return 0
-//     }
-// };
-// reverseLeftWords('abedefg', 2)
-
-/**
  * 题目：给定一个非空字符串 s，最多删除一个字符。判断是否能成为回文字符串。
  * @param {string} s
  * @return {boolean}
@@ -124,3 +105,39 @@ function isPalindrome(s, left, right) {
   return true
 }
 validPalindrome('abc');
+
+/**
+ * 题目：给定一个字符串，验证它是否是回文串，只考虑字母和数字字符，可以忽略字母的大小写。
+ * @param {string} s
+ * @return {boolean}
+ */
+var isPalindrome = function(s) {
+    let str = s.replace(/[^a-zA-Z0-9]/g, '').toLowerCase();
+    let left = 0, right = str.length - 1;
+    while(left < right) {
+        if(str[left] !== str[right]) {
+          return false
+        }
+        left++;
+        right--
+    }
+    return true
+};
+isPalindrome('1234  sdjjj ***')
+
+/**
+ * 题目：将一个给定字符串根据给定的行数，以从上往下、从左到右进行 Z 字形排列。
+ * @param {string} s
+ * @param {number} numRows
+ * @return {string}
+ */
+var convert = function(s, numRows) {
+    if (numRows <= 1) return s;
+    const n = 2*numRows -2; //每个周期的字符串长度
+    const rows = new Array(numRows).fill(''); //新建数组，每一行字符串是数组的一个元素
+    for(let i = 0; i < s.length; i++) {
+        let x = i % n;
+        rows[Math.min(x, n-x)] += s[i];
+    }
+    return rows.join('');
+};
