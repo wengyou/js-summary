@@ -141,3 +141,51 @@ var convert = function(s, numRows) {
     }
     return rows.join('');
 };
+
+/**
+ * 题目：给定一个单词列表，每个单词可以写成每个字母对应摩尔斯密码的组合。
+ * 例如，"cab" 可以写成 "-.-..--..."，(即 "-.-." + ".-" + "-..." 字符串的结合)。
+ * 我们将这样一个连接过程称作单词翻译。返回我们可以获得所有词不同单词翻译的数量。
+ * @param {string[]} words
+ * @return {number}
+ */
+var uniqueMorseRepresentations = function(words) {
+  const dectionary = {
+      "a": ".-",
+      "b": "-...",
+      "c": "-.-.",
+      "d": "-..",
+      "e": ".",
+      "f": "..-.",
+      "g": "--.",
+      "h": "....",
+      "i": "..",
+      "j": ".---",
+      "k": "-.-",
+      "l": ".-..",
+      "m": "--",
+      "n": "-.",
+      "o": "---",
+      "p": ".--.",
+      "q": "--.-",
+      "r": ".-.",
+      "s": "...",
+      "t": "-",
+      "u": "..-",
+      "v": "...-",
+      "w": ".--",
+      "x": "-..-",
+      "y": "-.--",
+      "z": "--.."
+  }
+  let set = new Set();
+  for (let i = 0; i < words.length; i++) {
+      let word = words[i];
+      let word_templete = ''
+      for(let j = 0; j < word.length; j++) {
+          word_templete += dectionary[word[j]]
+      }
+      set.add(word_templete);
+  }
+  return set.size;
+};
