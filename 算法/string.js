@@ -189,3 +189,19 @@ var uniqueMorseRepresentations = function(words) {
   }
   return set.size;
 };
+
+/**
+ * 题目：字符串轮转。给定两个字符串s1和s2，请编写代码检查s2是否为s1旋转而成
+ * @param {string} s1
+ * @param {string} s2
+ * @return {boolean}
+ */
+var isFlipedString = function(s1, s2) {
+    if(s1.length === s2.length) {
+      return s1.repeat(2).includes(s2);
+    } else {
+      return false
+    }
+};
+
+isFlipedString('waterbottle', 'erbottlewat');
