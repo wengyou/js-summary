@@ -205,3 +205,47 @@ var isFlipedString = function(s1, s2) {
 };
 
 isFlipedString('waterbottle', 'erbottlewat');
+
+/**
+ * @param {number} N
+ * @return {number}
+ */
+var rotatedDigits = function(N) {
+    let count = 0;
+    let reg1 = new RegExp("3|4|7");
+    let reg2 = new RegExp("2|5|6|9");
+    for(let i=1; i<=N; i++) {
+        if(!reg1.test(i) && reg2.test(i)) {
+          count++;
+        }
+    }
+    return count;
+};
+rotatedDigits(11)
+
+/**
+ * 题目：给定一组字符，使用原地算法将其压缩。压缩后的长度必须始终小于或等于原数组长度。
+ * 数组的每个元素应该是长度为1 的字符（不是 int 整数类型）。在完成原地修改输入数组后，返回数组的新长度。
+ * @param {character[]} chars
+ * @return {number}
+ */
+var compress = function(chars) {
+  var len = chars.length
+  for (var i = 0, j = 0; j < len;) {
+      chars[i] = chars[j];
+      var temp = j;
+      while (j < len && chars[i] === chars[j]) {
+          j++
+      }
+      i++;
+      var dis = j - temp;
+      if (dis > 1) {
+          var distance = Array.from('' + dis);
+          for (var k = 0; k < distance.length; k++) {
+              chars[i++] = distance[k];
+          }
+      }
+
+  }
+  return i;
+};
