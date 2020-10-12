@@ -4,7 +4,13 @@
  * @return {string}
  */
 var minNumber = function(nums) {
-    nums.sort((a,b) => a - b);
-    console.log(nums)
+    nums.sort((a, b) => {
+        const str1 = a + '' + b;
+        const str2 = b + '' + a;
+        if (str1 < str2) return -1;
+        if (str1 > str2) return 1;
+        return 0
+    })
+    return nums.join('')
 };
 minNumber([1,20,3,5,9])
