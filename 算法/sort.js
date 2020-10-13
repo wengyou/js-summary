@@ -14,3 +14,29 @@ var minNumber = function(nums) {
     return nums.join('')
 };
 minNumber([1,20,3,5,9])
+
+/**
+ * 题目：数组中有一个数字出现的次数超过数组长度的一半，请找出这个数字。
+ * @param {number[]} nums
+ * @return {number}
+ */
+var majorityElement1 = function(nums) {
+    nums.sort();
+    return nums[Math.floor(nums.length/2)]
+};
+
+var majorityElement2 = function(nums) {
+    let num = nums[0];
+    let count = 1;
+    for(let i = 1; i < nums.length; i++) {
+        if (count === 0) {
+            num = nums[i]
+        }
+        if (nums[i] === num) {
+            count++
+        } else {
+            count--
+        }
+    }
+    return num
+};
