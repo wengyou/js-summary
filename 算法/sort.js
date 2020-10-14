@@ -40,3 +40,28 @@ var majorityElement2 = function(nums) {
     }
     return num
 };
+
+/**
+ * 题目：请实现一个函数，输入一个整数，输出该数二进制表示中 1 的个数。
+ * @param {number} n - a positive integer
+ * @return {number}
+ */
+var hammingWeight1 = function(n) {
+    const binary = n.toString(2);
+    let count = 0;
+    for(let i = 0; i < binary.length; i++) {
+        if (binary[i] === '1') {
+            count++
+        }
+    }
+    return count
+};
+
+var hammingWeight2 = function(n) {
+    const count = n.toString(2).match(/1/g);
+    if (count) {
+        return count.length
+    } else {
+        return 0
+    }
+};
