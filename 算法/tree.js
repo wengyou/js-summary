@@ -36,3 +36,4 @@ var averageOfLevels = function(root) {
     return numbers;
   };
  averageOfLevels([3])  
+
