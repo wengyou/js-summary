@@ -281,3 +281,74 @@ var checkRecord = function(s) {
 };
 
 checkRecord("PPALLL")
+
+/**
+ * 题目：请从字符串中找出一个最长的不包含重复字符的子字符串，计算该最长子字符串的长度。
+ * @param {string} s
+ * @return {number}
+ */
+
+var lengthOfLongestSubstring = function(s) {
+    const len = s.length;
+    let res = 0;
+    let temp = '';
+    for (let i = 0; i < len; i++) {
+        if (temp.indexOf(s[i]) === -1) {
+            temp += s[i];
+            res = Math.max(res, temp.length)
+        } else {
+            temp = temp.slice(temp.indexOf(s[i]) + 1);
+            temp += s[i]
+        }
+    }
+    return res;
+};
+
+var lengthOfLongestSubstring1 = function(s) {
+    if (s.length < 1) return s.length;
+    const len = s.length;
+    let maxLength = 1, head = 0, tail = 1;
+    while(tail < len) {
+        const index = s.substring(head, tail).indexOf(s[tail]);
+        if (index !== -1 && head < tail) {
+            head += index + 1;
+            tail++
+        } else {
+            tail++;
+            if (tail - head > maxLength) {maxLength = tail - head}
+        }
+    }
+    return maxLength
+}
+
+const lengthOfLongestSubstring2 = function(s) {
+    const len = s.length;
+    const map = {};
+    let left = 0, right = 0, res = 0;
+    while (left < len && right < len) {
+        if (!map[s[right]]) {
+            map[s[right]] = true;
+            res = Math.max(res, right - left + 1);
+            right++;
+        } else {
+            map[s[left]] = false;
+            left++;
+        }
+    }
+    return res;
+}
+
+const lengthOfLongestSubstring3 = function(s) {
+  const len = s.length;
+  const map = new Map();
+  let left = 0, right = 0, res = 0;
+  while(left < len && right < len) {
+      if (map.has(s[right]) && map.get(s[right]) >= left) {
+          left = map.get(s[right]) + 1;
+      }
+      res = Math.max(res, right-left+1);
+      map.set(s[right], right);
+      right++
+  }
+  return res;
+}
